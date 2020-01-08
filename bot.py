@@ -47,7 +47,7 @@ for event in longpoll.listen():
             lang = detect_language(text)
             lang_name = language_name(lang)
             write_msg(f'Язык определен, как: {lang_name}\nКод языка: {lang}', event.object.peer_id)
-        if(words[0] == '/trans' or words[0] == '/translate' or words[0] == '/перевод' or words[0] == '/переведи'):
+        elif(words[0] == '/trans' or words[0] == '/translate' or words[0] == '/перевод' or words[0] == '/переведи'):
             if(len(words) < 3):
                 write_msg(f'Используйте команду в виде: {words[0]} [код языка] [текст]\nПример: {words[0]} en Привет!', event.object.peer_id)
                 continue
@@ -60,17 +60,26 @@ for event in longpoll.listen():
                     text_to_translate += word + ' '
             translated_text = translate(text_to_translate, words[1])
             if(translated_text == -1):
-                write_msg(f'Вы ввели неверный код языка!\nИспользуйте команду в виде: {words[0]} [код языка] [текст]\nПример: {words[0]} en Привет!', event.object.peer_id)
+                if(detect_language(text_to_translate) == 'ru'):
+                    translated_text = translate(text_to_translate, 'en')
+                    write_msg(f'Вы ввели неверный код языка или не ввели его вовсе!\nМы перевели текст на английский:\n{translated_text}', event.object.peer_id)
+                else:
+                    translated_text = translate(text_to_translate, 'ru')
+                    write_msg(f'Вы ввели неверный код языка или не ввели его вовсе!\nМы перевели текст на русский:\n{translated_text}', event.object.peer_id)
                 continue
             else: 
                 write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
-        elif(len(text) < 500):
+        else:
             lang = detect_language(text)
-            if(lang != 'ru'):
-                if(len(text) < 101):
-                    translated_text = translate(text, 'ru')
-                    write_msg(f'В сообщении обнаружен иностранный текст ({lang}).\nПеревод на русский:\n{translated_text}', event.object.peer_id)
-                else:
-                    write_msg(f'В сообщении обнаружен иностранный текст ({lang}), начинаю переводить...', event.object.peer_id)
-                    translated_text = translate(text, 'ru')
-                    write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
+            print(lang)
+            if(len(text) < 500):
+                if(lang == ''):
+                    continue
+                if(lang != 'ru'):
+                    if(len(text) < 101):
+                        translated_text = translate(text, 'ru')
+                        write_msg(f'В сообщении обнаружен иностранный текст ({lang}).\nПеревод на русский:\n{translated_text}', event.object.peer_id)
+                    else:
+                        write_msg(f'В сообщении обнаружен иностранный текст ({lang}), начинаю переводить...', event.object.peer_id)
+                        translated_text = translate(text, 'ru')
+                        write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
