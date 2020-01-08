@@ -1,7 +1,7 @@
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from random import randint
-import reqests
+import requests
 import config
 
 bot = vk_api.VkApi(token=config.token)
@@ -30,4 +30,14 @@ def translate(text, lang):
 
 for event in longpoll.listen():
     if(event.type == VkBotEventType.MESSAGE_NEW):
-        print(f"New message from id{event.object.from_id} - {event.object.text}")
+        text = event.object.text
+        if(len(text) < 500):
+            lang = detect_language(text)
+            if(lang != 'ru'):
+                if(len(text) < 101):
+                    translated_text = translate(text, 'ru')
+                    write_msg(f'В сообщении обнаружен иностранный текст ({lang}). Перевод на русский:\n{translated_text}', event.object.peer_id)
+                else:
+                    write_msg(f'В сообщении обнаружен иностранный текст ({lang}), начинаю переводить...', event.object.peer_id)
+                    translated_text = translate(text, 'ru')
+                    write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
