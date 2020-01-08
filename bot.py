@@ -73,7 +73,7 @@ for event in longpoll.listen():
             lang = detect_language(text)
             print(lang)
             if(len(text) < 500):
-                if(lang == ''):
+                if(lang == '' or lang == None):
                     continue
                 if(lang != 'ru'):
                     if(len(text) < 101):
