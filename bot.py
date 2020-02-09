@@ -47,7 +47,7 @@ for event in longpoll.listen():
             lang = detect_language(text)
             lang_name = language_name(lang)
             write_msg(f'Язык определен, как: {lang_name}\nКод языка: {lang}', event.object.peer_id)
-        elif(words[0] == '/trans' or words[0] == '/translate' or words[0] == '/перевод' or words[0] == '/переведи'):
+        elif(words[0] == '/trans' or words[0] == '/translate' or words[0] == 'перевод' or words[0] == 'переведи'):
             if(len(words) < 3):
                 write_msg(f'Используйте команду в виде: {words[0]} [код языка] [текст]\nПример: {words[0]} en Привет!', event.object.peer_id)
                 continue
@@ -69,6 +69,8 @@ for event in longpoll.listen():
                 continue
             else: 
                 write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
+        elif(text == '' or text[0] == '/' or text[0] == '@' or text[0] == '*'):
+            continue
         else:
             lang = detect_language(text)
             print(lang)
