@@ -69,7 +69,7 @@ for event in longpoll.listen():
                 continue
             else: 
                 write_msg(f'Перевод успешно завершен:\n{translated_text}', event.object.peer_id)
-        elif(text == '' or text[0] == '/' or text[0] == '@' or text[0] == '*'):
+        elif(text == '' or text[0] == '/'):
             continue
         else:
             lang = detect_language(text)
