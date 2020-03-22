@@ -1,0 +1,2 @@
+requests
+vkbee==1.6
