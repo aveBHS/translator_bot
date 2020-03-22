@@ -1,4 +1,4 @@
-### translator_bot
+# translator_bot
 
 ## Установка
 
@@ -6,8 +6,9 @@
   pip3 install -r requirements.txt
   python3 bot.py
 ```
-```
+
+
 ## P.S Поменяйте данные в конфиге на ваши!
 
 # P.S.S работает только с vkbee версии 1.6
-```
+
