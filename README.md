@@ -14,24 +14,24 @@
 ### Установка
 
 ```bash
-  pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Фикс ошибки с UVLoop:
   
 ```java
-  Удалите uvloop из requirements.txt
+Удалите uvloop из requirements.txt
 ```
 
 ### Настройка конфига
   
 ```css
-   Откройте файл config.py и вставьте свои данные
+Откройте файл config.py и вставьте свои данные
 ```
 
 ### Запуск
  
 ```bash
-   python3.bot.py
+python3.bot.py
 ```
 
