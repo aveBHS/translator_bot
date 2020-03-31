@@ -2,7 +2,7 @@ import vkbee
 import requests
 import config
 import asyncio
-
+from vkbee import oldlong
 
 async def write_msg(message, peer_id):
     bot = vkbee.VkApi(
@@ -41,11 +41,11 @@ def translate(text, lang):
         print(response.url)
         
 async def main(loop):
-     bot = vkbee.VkApi(
+     bot = oldlong.VkApi(
         config.token,
         loop=loop
      )
-     vk_polluse = vkbee.BotLongpoll(bot, config.group_id,10)
+     vk_polluse = oldlong.BotLongpoll(bot, config.group_id,10)
      async for event in vk_polluse.events():
         if event['type'] == 'message_new':
             text = event['object']['message']['text']
