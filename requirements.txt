@@ -1,2 +1,2 @@
-requests
-vkbee==1.6
+vkbee
+uvloop
