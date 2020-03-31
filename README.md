@@ -1,14 +1,37 @@
 # translator_bot
 
-## Установка
+## ALERT
+  
+```bash
+Работает с VKBee последней версии
+```
+
+## ALERT
+
+# Как использовать? 
+
+
+### Установка
 
 ```bash
   pip3 install -r requirements.txt
-  python3 bot.py
 ```
 
+### Фикс ошибки с UVLoop:
+  
+```java
+  Удалите uvloop из requirements.txt
+```
 
-## P.S Поменяйте данные в конфиге на ваши!
+### Настройка конфига
+  
+```css
+   Откройте файл config.py и вставьте свои данные
+```
 
-# P.S.S работает только с vkbee версии 1.6
+### Запуск
+ 
+```bash
+   python3.bot.py
+```
 
